@@ -29,5 +29,7 @@ coverage
 
 *.tsbuildinfo
 
-.env
+.env*
+!.env.example
+
 temp
