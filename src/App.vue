@@ -6,13 +6,15 @@ import { RouterLink, RouterView } from 'vue-router'
   <header>
     <div class="menu">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">Главная</RouterLink>
+        <RouterLink to="/incomes">Доходы</RouterLink>
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <main class="content">
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
@@ -51,5 +53,9 @@ header {
 .menu a:focus-visible {
   background-color: var(--c-hover-bg);
   outline: 2px solid var(--c-focus-border);
+}
+
+.content {
+  padding: 32px 16px;
 }
 </style>

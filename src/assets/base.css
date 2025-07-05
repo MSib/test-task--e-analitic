@@ -4,6 +4,8 @@
   --c-separator: #444444;
   --c-hover-text: var(--c-text);
   --c-hover-bg: #444444;
+  --c-active-bg: #555555;
+  --c-disabled-text: #888888;
   --c-focus-border: var(--c-text);
 }
 
@@ -33,4 +35,34 @@ body {
     'Helvetica Neue',
     sans-serif;
   font-size: 16px;
+}
+
+.button {
+  margin: 4px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font: inherit;
+  color: var(--c-text);
+  background-color: var(--c-bg);
+  border: 2px solid var(--c-text);
+  cursor: pointer;
+  outline: none;
+  transition:
+    background-color 0.15s ease-in-out,
+    outline 0.05s linear;
+}
+.button:not(:disabled):hover {
+  background-color: var(--c-hover-bg);
+}
+.button:not(:disabled):active {
+  background-color: var(--c-active-bg);
+}
+.button:disabled {
+  border: 2px solid var(--c-disabled-text);
+  color: var(--c-disabled-text);
+  cursor: auto;
+}
+.button:focus-visible {
+  outline-offset: 2px;
+  outline: 2px solid var(--c-focus-border);
 }
