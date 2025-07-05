@@ -2,27 +2,27 @@
 import { ref, onMounted } from 'vue'
 import ChartBar from '@/components/ChartElement.vue'
 import { fetchData } from '@/useFetchData.ts'
-import type { Endpoint, IncomeItem, IncomesResponse } from '@/endpoints.ts'
+import type { Endpoint, SaleItem, SalesResponse } from '@/endpoints.ts'
 import { getEndpoint, getApiKey } from '@/endpoints.ts'
 import { formatDate } from '@/utils.ts'
 import type { ChartDataset } from '@/types.ts'
 
 const TODAY_ONLY = false
-const endpoint: Endpoint = 'incomes'
+const endpoint: Endpoint = 'sales'
 const endpointURL = getEndpoint(endpoint)
 
-const data = ref<IncomesResponse | null>(null)
+const data = ref<SalesResponse | null>(null)
 const error = ref<string | null>(null)
 const loading = ref(false)
 const perPage = ref(100)
 const page = ref(1)
 // Fields with numeric values or use ['count', 'Количество']
-const filterFields: Array<[keyof IncomeItem | 'count', string]> = [
-  ['quantity', 'Количество'],
-  ['total_price', 'Цена'],
+const filterFields: Array<[keyof SaleItem | 'count', string]> = [
+  ['count', 'Количество'],
+  ['finished_price', 'Цена'],
 ]
-const groupDefault: keyof IncomeItem = 'warehouse_name'
-const filterDefault: keyof IncomeItem | 'count' = filterFields[0][0]
+const groupDefault: keyof SaleItem = 'warehouse_name'
+const filterDefault: keyof SaleItem | 'count' = filterFields[0][0]
 const filter = ref(filterDefault)
 
 const chartData = ref<{ labels?: string[]; datasets: ChartDataset[] }>({ datasets: [] })
@@ -40,7 +40,7 @@ async function getData() {
   if (endpointURL && apiKey && dateFrom.value && dateTo.value) {
     loading.value = true
     error.value = null
-    const { data: responseData, error: responseError } = await fetchData<'incomes'>(
+    const { data: responseData, error: responseError } = await fetchData<'sales'>(
       endpointURL,
       'GET',
       {
@@ -107,7 +107,7 @@ function convertData() {
     chartData.value = convertDataGeneric(
       data.value.data,
       groupDefault,
-      filter.value as keyof IncomeItem,
+      filter.value as keyof SaleItem,
       label,
     )
   }

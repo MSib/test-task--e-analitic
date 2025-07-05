@@ -66,3 +66,18 @@ body {
   outline-offset: 2px;
   outline: 2px solid var(--c-focus-border);
 }
+
+.link {
+  color: #00bfff;
+  transition: color 0.15s ease-in-out;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+.link:hover {
+  color: #0092c2;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
+}
+.link:active {
+  color: #006f94;
+}
